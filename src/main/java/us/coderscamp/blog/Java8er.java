@@ -1,3 +1,5 @@
+package us.coderscamp.blog;
+
 /**
  * Created by nevda on 27/3/14.
  */
