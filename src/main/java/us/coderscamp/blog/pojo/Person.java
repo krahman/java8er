@@ -101,11 +101,27 @@ public class Person {
       "Phone: " + phone + "\n" +
       "Address: " + address + "\n"
                 );
-  } 
+  }
   
   public void printName(){    
     System.out.println(
       "Name: " + givenName + " " + surName);
+  }
+  
+  public String getPhone(){
+	  return phone;
+  }
+  
+  public Gender getGender(){
+	  return gender;
+  }
+  
+  public String getEmail(){
+	  return eMail;
+  }
+  
+  public String getAddress(){
+	  return address;
   }
 
   @Override
