@@ -3,8 +3,11 @@ package us.coderscamp.blog;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import us.coderscamp.blog.pojo.Gender;
 import us.coderscamp.blog.pojo.Person;
@@ -41,6 +44,8 @@ public class Java8er {
         j8.NameTestNew();
         j8.Test1ForEach();
         j8.Test2Filter();
+        j8.Test3ToList();
+        j8.Test4ToSum();
     }
     
     // Comparator with lambda 
@@ -210,5 +215,63 @@ public class Java8er {
     	System.out.println("\n=== Eastern Pilot Phone List ===");
     	pl.stream().filter(search.getCriteria(Constants.ALL_PILOTS))
     		.forEach(Person::printEasternName);
+    }
+    
+    public void Test3ToList(){
+    	
+    	List<Person> pl = Person.createShortList();
+    	
+    	SearchCriteria search = SearchCriteria.getInstance();
+    	
+    	// Make a list after filtering
+    	List<Person> pilotList = pl
+    			.stream()
+    			.filter(search.getCriteria(Constants.ALL_PILOTS))
+    			.collect(Collectors.toList());
+    	
+    	System.out.println("\n=== Western Pilot Phone List ===");
+    	pilotList.forEach(Person::printEasternName);
+    }
+    
+    public void Test4ToSum(){
+    	
+    	List<Person> pl = Person.createShortList();
+    	
+    	SearchCriteria search = SearchCriteria.getInstance();
+    	
+    	// Old style sum
+    	int sum = 0;
+    	int count = 0;
+    	
+    	for(Person p:pl){
+    		if (p.getAge() >= 23 && p.getAge() <= 65 ){
+    			sum = sum + p.getAge();
+    			count++;
+    		}
+    	}
+    	
+    	long average = sum/count;
+    	System.out.println("\n=== Total ages : " + sum);
+    	System.out.println("\n=== Average age : " + average);
+    	
+    	
+    	System.out.println("\n=== Calc new style ===");
+    	
+    	// Get sum of ages
+    	long totalAges = pl
+    			.stream()
+    			.filter(search.getCriteria(Constants.ALL_DRAFTEES))
+    			.mapToInt(p -> p.getAge())
+    			.sum();
+    	
+    	// Get average of ages
+    	OptionalDouble averageAge = pl
+    			.stream()
+    			.filter(search.getCriteria(Constants.ALL_DRIVERS))
+    			.mapToDouble(p->p.getAge())
+    			.average();
+    	
+    	System.out.println("\n=== Total ages : " + totalAges);
+    	System.out.println("\n=== Average age : " + averageAge);
     }
 }
