@@ -109,6 +109,22 @@ public class Person {
 	  return f.apply(this);
   }
   
+  public void printWesternName(){
+	  System.out.println("\nName: " + this.getGivenName() + " " + this.getSurName() + "\n" +
+			  "Age: " + this.getAge() + "  " + "Gender: " + this.getGender() + "\n" +
+			  "EMail: " + this.getEmail() + "\n" + 
+			  "Phone: " + this.getPhone() + "\n" +
+			  "Address: " + this.getAddress());
+  }
+  
+  public void printEasternName(){
+	  System.out.println("\nName: " + this.getSurName() + " " + this.getGivenName() + "\n" +
+			  "Age: " + this.getAge() + "  " + "Gender: " + this.getGender() + "\n" +
+			  "EMail: " + this.getEmail() + "\n" +
+			  "Phone: " + this.getPhone() + "\n" +
+			  "Address: " + this.getAddress());
+  }
+  
   public void printName(){    
     System.out.println(
       "Name: " + givenName + " " + surName);

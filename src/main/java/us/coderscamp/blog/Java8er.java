@@ -1,6 +1,5 @@
 package us.coderscamp.blog;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -40,6 +39,8 @@ public class Java8er {
         j8.RoboCallTestAnonymous();
         j8.RoboCallTestWithLambda();
         j8.NameTestNew();
+        j8.Test1ForEach();
+        j8.Test2Filter();
     }
     
     // Comparator with lambda 
@@ -176,5 +177,38 @@ public class Java8er {
     		System.out.println(p.printCustom(easternStyle));
     	}
     	
+    }
+    
+    public void Test1ForEach(){
+    	
+    	List<Person> pl = Person.createShortList();
+    	
+    	System.out.println("\n=== Western Phone List ===");
+    	pl.forEach(p -> p.printWesternName());
+    	
+    	System.out.println("\n=== Eastern Phone List ===");
+    	pl.forEach(Person::printEasternName);
+    	
+    	System.out.println("\n=== Custom Phone List ===");
+    	pl.forEach(p -> { System.out.println(p.printCustom(f-> "Name :" + f.getGivenName() + " EMail :" + f.getEmail()));});
+    }
+    
+    public void Test2Filter(){
+    	
+    	List<Person> pl = Person.createShortList();
+    	
+    	SearchCriteria search = SearchCriteria.getInstance();
+    	
+    	System.out.println("\n=== Western Pilot Phone List ===");
+    	pl.stream().filter(search.getCriteria(Constants.ALL_PILOTS))
+    		.forEach(Person::printWesternName);
+    	
+    	System.out.println("\n=== Eastern Draftee Phone List ===");
+    	pl.stream().filter(search.getCriteria(Constants.ALL_DRAFTEES))
+    		.forEach(Person::printEasternName);
+    	
+    	System.out.println("\n=== Eastern Pilot Phone List ===");
+    	pl.stream().filter(search.getCriteria(Constants.ALL_PILOTS))
+    		.forEach(Person::printEasternName);
     }
 }
