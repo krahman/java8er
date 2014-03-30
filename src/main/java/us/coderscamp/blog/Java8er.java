@@ -27,6 +27,10 @@ public class Java8er {
     	// Lambda Runnable
         Runnable lR = () -> System.out.println("foo");
         lR.run();
+        
+        // Run comparator Test
+        Java8er j8 = new Java8er();
+        j8.ComparatorTest();
     }
     
     public void ComparatorTest(){
