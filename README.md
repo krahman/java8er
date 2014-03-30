@@ -1,2 +1,2 @@
-java8er
+Java 8 Tutorial
 =======
