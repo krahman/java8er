@@ -2,6 +2,7 @@ package us.coderscamp.blog.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * @author MikeW
@@ -101,6 +102,11 @@ public class Person {
       "Phone: " + phone + "\n" +
       "Address: " + address + "\n"
                 );
+  }
+  
+  // printCustom using Function interface
+  public String printCustom(Function<Person, String> f){
+	  return f.apply(this);
   }
   
   public void printName(){    

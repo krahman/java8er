@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import us.coderscamp.blog.pojo.Gender;
@@ -38,6 +39,7 @@ public class Java8er {
         j8.ComparatorTest();
         j8.RoboCallTestAnonymous();
         j8.RoboCallTestWithLambda();
+        j8.NameTestNew();
     }
     
     // Comparator with lambda 
@@ -74,12 +76,13 @@ public class Java8er {
     	}
     }
     
+    // Robo Call Test with Anonymous Function
     public void RoboCallTestAnonymous(){
     	
 		List<Person> pl = Person.createShortList();
 		RoboContactMethodsAnonymous robo = new RoboContactMethodsAnonymous();
 		
-		System.out.println("=== Robo Call With Anonymous Function ===");
+		System.out.println("\n=== Robo Call With Anonymous Function ===");
 		
 		System.out.println("=== Calling all drivers ===");
 		robo.callDrivers(pl, new ITest<Person>() {
@@ -112,12 +115,13 @@ public class Java8er {
 		});
     }
     
+    // Robo Call Test With Lambda Expression
     public void RoboCallTestWithLambda(){
     	
     	List<Person> pl = Person.createShortList();
     	RoboContactMethodsLambda robo = new RoboContactMethodsLambda();
     	
-    	System.out.println("=== Robo Call With Lambda ===");
+    	System.out.println("\n=== Robo Call With Lambda ===");
     	
     	// Predicates
     	Predicate<Person> allDrivers = p -> p.getAge() >= 16;
@@ -130,5 +134,47 @@ public class Java8er {
     	robo.emailDraftees(pl, allDraftees);
     	System.out.println("=== Mail all pilots ===");
     	robo.mailPilots(pl, allPilots);
+    }
+    
+    public void NameTestNew(){
+    	System.out.println("\n=== NameTestNew ===");
+    	
+    	List<Person> pl = Person.createShortList();
+    	
+    	// Print custom first name + email
+    	for(Person person:pl){
+    		System.out.println(person.printCustom(p -> "Name: " + p.getGivenName() + " EMail: " + p.getEmail()));
+    	}
+    	
+    	// Define Western and Eastern with Lambda
+    	Function<Person, String> westernStyle = p ->{
+    		return "\nName: " + p.getGivenName() + " " + p.getSurName() + "\n" +
+    				"Age: " + p.getAge() + "  " + 
+    				"Gender: " + p.getGender() + "\n" +
+    				"EMail: " + p.getEmail() + "\n" + 
+    				"Phone: " + p.getPhone() + "\n" +
+    				"Address: " + p.getAddress();
+    	};
+    	
+    	Function<Person, String> easternStyle = p ->{
+    		return "\nName: " + p.getSurName() + " "  + p.getGivenName() + "\n" + 
+    				"Age: " + p.getAge() + "  " +
+    				"Gender: " + p.getGender() + "\n" +
+    				"EMail: " + p.getEmail() + "\n" +
+    				"Phone: " + p.getPhone() + "\n" +
+    				"Address: " + p.getAddress();
+    	};
+    	
+    	// Print western style
+    	System.out.println("\n=== Western List ===");
+    	for (Person p:pl){
+    		System.out.println(p.printCustom(westernStyle));
+    	}
+    	
+    	System.out.println("\n=== Eastern List ===");
+    	for(Person p:pl){
+    		System.out.println(p.printCustom(easternStyle));
+    	}
+    	
     }
 }
