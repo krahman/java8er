@@ -5,7 +5,20 @@ package us.coderscamp.blog;
  */
 public class Java8er {
     public static void main(String[] args){
-        Runnable r = () -> System.out.println("foo");
-        r.run();
+    	
+    	// Anonymous Runnable
+    	Runnable aR = new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				System.out.println();
+			}
+		};
+		aR.run();
+    	
+    	// Lambda Runnable
+        Runnable lR = () -> System.out.println("foo");
+        lR.run();
     }
 }
