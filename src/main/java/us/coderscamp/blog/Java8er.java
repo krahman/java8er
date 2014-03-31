@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.OptionalDouble;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import us.coderscamp.blog.pojo.Gender;
